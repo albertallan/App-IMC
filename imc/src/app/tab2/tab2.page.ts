@@ -8,12 +8,12 @@ import {ApiService} from '../services/api.service';
 })
 export class Tab2Page {
 
-  public news = []
+  public itenscalculos = []
 
   constructor(private apiservice : ApiService) {
 
-    this.apiservice.getNews().subscribe((result:any)=>{
-        this.news = result.news
+    this.apiservice.getCalculos().subscribe((result:any)=>{
+        this.itenscalculos = result
     })
   }
 }

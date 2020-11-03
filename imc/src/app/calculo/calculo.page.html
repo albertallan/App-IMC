@@ -10,25 +10,13 @@
   <form id="card-form" (ngSubmit)="calcularIMC()" *ngIf="imc == null">
     <ion-item>
       <ion-label>Altura(EX:1.70)</ion-label>
-      <ion-input type="text" [(ngModel)]="altura" name="altura"></ion-input>
+      <ion-input type="text" [(ngModel)]="calculos.altura" name="altura"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Peso</ion-label>
-      <ion-textarea [(ngModel)]="peso" name="peso"></ion-textarea>
+      <ion-textarea [(ngModel)]="calculos.peso" name="peso"></ion-textarea>
     </ion-item>
     <ion-button id="botao" ion-button type="submit" block>Calcular</ion-button>
     <img src="../assets/icon/tabela.jpg"/> 
   </form>
-  
-  <ion-card id="card-result"*ngIf="imc !== null">
-    <ion-card-content >
-      <p>IMC:{{ imc | number:'1.2-2'}}</p>
-      <p>Classificação:{{ classificacao}}</p>
-      <p>Categoria:{{ categoria }}</p>
-    </ion-card-content>
-    <ion-button id="botao-volta" (click)= "novoimc()"id="new-imc-button" block>Novo Calculo</ion-button>
-  </ion-card>
-
-
-
 </ion-content>

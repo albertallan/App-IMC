@@ -9,7 +9,10 @@ export class ApiService {
 
   constructor(private httpClient : HttpClient) { }
 
-  public getNews(){
-    return this.httpClient.get('https://www.vagalume.com.br/news/index.js')
+  public getCalculos(){
+    return this.httpClient.get('http://localhost:3000/api/todo/');
+  }
+  public postCalculos(calculos){
+    return this.httpClient.post('http://localhost:3000/api/todo', calculos);
   }
 }
