@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {AlertController} from '@ionic/angular'
 import { ApiService } from '../services/api.service';
-
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-calculo',
@@ -18,7 +18,7 @@ export class CalculoPage {
     'categoria' : ''
   }
   
-  constructor(private apiService: ApiService,public alertController: AlertController) { }
+  constructor(private apiService: ApiService,public alertController: AlertController,public router: Router) { }
 
   public async calcularIMC(){
     
@@ -36,16 +36,16 @@ export class CalculoPage {
       if(this.calculos.imc <= 18.5){
         this.calculos.classificacao = 'MAGREZA'
         this.calculos.categoria = 'Grau 0'
-      }else if(this.calculos.imc > 18.5 || this.calculos.imc < 24.9){
+      }else if(this.calculos.imc > 18.5 && this.calculos.imc < 24.9){
         this.calculos.classificacao = 'Normal'
         this.calculos.categoria = 'Grau 0'
-      }else if(this.calculos.imc > 25.0 || this.calculos.imc < 29.9){
+      }else if(this.calculos.imc > 25.0 && this.calculos.imc < 29.9){
         this.calculos.classificacao = 'Sobrepeso'
         this.calculos.categoria = 'Grau 0'
-      }else if(this.calculos.imc > 30.0 || this.calculos.imc< 34.9){
+      }else if(this.calculos.imc > 30.0 && this.calculos.imc< 34.9){
         this.calculos.classificacao = 'Obesidade'
         this.calculos.categoria = 'Grau 1'
-      }else if(this.calculos.imc > 35.0 || this.calculos.imc<39.9){
+      }else if(this.calculos.imc > 35.0 && this.calculos.imc<39.9){
         this.calculos.classificacao = "Obesidade"
         this.calculos.categoria = "Grau 2"
       }else if(this.calculos.imc > 40){
@@ -54,8 +54,14 @@ export class CalculoPage {
       }
 
       this.apiService.postCalculos(this.calculos).subscribe((result:any) => {
-        this.alertController.dismiss(result);
+        let navigationExtras: NavigationExtras = {
+          state: {
+            calculos: this.calculos
+          }
+        };
+        this.router.navigate(['/tabs/tab2'],navigationExtras);
       })
+
       
     }  
   }
